@@ -65,7 +65,7 @@ public class BFrontController extends HttpServlet {
 			command.excute(request, response);
 			
 			viewPage = "list.jsp";
-//			response.sendRedirect(viewPage);
+//			response.sendRedirect(viewPage); // 기존의 request 객체의 내용을 사용하지 못함
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
