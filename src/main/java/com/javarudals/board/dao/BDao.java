@@ -61,7 +61,7 @@ public class BDao {
 		try {
 			conn = datasource.getConnection();
 			String query = "select * from mvc_board order by bgroup desc, bstep asc";
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);			
 			resultset = pstmt.executeQuery();
 			
 			while(resultset.next()) {
@@ -76,10 +76,10 @@ public class BDao {
 				int bIndent = resultset.getInt("bindent");
 				
 				BDto dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
-				dtos.add(dto);
+				dtos.add(dto);				
 				
 			}
-						
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,8 +87,7 @@ public class BDao {
 			try {
 				if(resultset != null) {
 					resultset.close();
-				}
-				
+				}				
 				if(pstmt != null) {
 					pstmt.close();
 				}
@@ -100,10 +99,89 @@ public class BDao {
 			}
 		}
 		
-		
 		return dtos;
-		
 	}
 	
+	public BDto contentView(String strId) {
+		
+//		ArrayList<BDto> dtos = new ArrayList<BDto>();
+		BDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet resultset = null;
+		
+		try {
+			conn = datasource.getConnection();
+			String query = "select * from mvc_board where bid = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, strId);
+			resultset = pstmt.executeQuery();
+			
+			while(resultset.next()) {
+				int bId = resultset.getInt("bid");
+				String bName = resultset.getString("bname");
+				String bTitle = resultset.getString("btitle");
+				String bContent = resultset.getString("bcontent");
+				Timestamp bDate = resultset.getTimestamp("bdate");
+				int bHit = resultset.getInt("bhit");
+				int bGroup = resultset.getInt("bgroup");
+				int bStep = resultset.getInt("bstep");
+				int bIndent = resultset.getInt("bindent");
+				
+				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);								
+				
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultset != null) {
+					resultset.close();
+				}				
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
+	
+	public void modify(String bid, String bname, String btitle, String bcontent) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = datasource.getConnection();
+			String query = "update mvc_board set bname = ?, btitle = ?, bcontent = ? where bid = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bname);
+			pstmt.setString(2, btitle);
+			pstmt.setString(3, bcontent);
+			pstmt.setInt(4, Integer.parseInt(bid));
+			int ret = pstmt.executeUpdate();//데이터 수정이 성공하면 1 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 	
 }

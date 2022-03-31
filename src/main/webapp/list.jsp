@@ -22,7 +22,7 @@
 		<tr>
 			<td>${dto.bid}</td>
 			<td>${dto.bname}</td>
-			<td>${dto.btitle}</td>
+			<td><a href="content_view.do?bid=${dto.bid}">${dto.btitle}</a></td>
 			<td>${dto.bdate}</td>
 			<td>${dto.bhit}</td>		
 		</tr>
@@ -30,7 +30,7 @@
 		<tr>
 			<td colspan="5" align="right"><a href="write_view.do">글쓰기</a></td>
 		</tr>	
-	
+		
 	</table>
 </body>
 </html>
