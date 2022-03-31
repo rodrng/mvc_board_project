@@ -30,8 +30,8 @@
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="글수정"> &nbsp;&nbsp;
-			<a href="list.do">목록보기</a> &nbsp;&nbsp;<a href="delete.do">글삭제</a>
-			 &nbsp;&nbsp;<a href="reply_view.do">답변</a></td>
+			<a href="list.do">목록보기</a> &nbsp;&nbsp;<a href="delete.do?bid=${content_view.bid}">글삭제</a>
+			 &nbsp;&nbsp;<a href="reply_view.do?bid=${content_view.bid}">답변</a></td>
 		</tr>		
 		</form>
 	</table>
