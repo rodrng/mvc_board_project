@@ -10,19 +10,22 @@
 <body>
 	<h2>자유게시판</h2>
 	<hr>
-	<table width="500" cellpadding="0" cellspacing="0" border="1">
+	<table width="800" cellpadding="0" cellspacing="0" border="1">
 		<tr>
 			<td>번호</td>
 			<td>글쓴이</td>
-			<td>글제목</td>
+			<td width="400">글제목</td>
 			<td>게시일</td>
 			<td>조회수</td>
 		</tr>
 		<c:forEach items="${list}" var="dto">
 		<tr>
 			<td>${dto.bid}</td>
-			<td>${dto.bname}</td>
-			<td><a href="content_view.do?bid=${dto.bid}">${dto.btitle}</a></td>
+			<td>${dto.bname}</td>			
+			<td>
+				<c:forEach begin="1" end="${dto.bindent}">&nbsp;&nbsp;</c:forEach>
+				<a href="content_view.do?bid=${dto.bid}">${dto.btitle}</a>
+			</td>
 			<td>${dto.bdate}</td>
 			<td>${dto.bhit}</td>		
 		</tr>

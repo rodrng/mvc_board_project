@@ -14,8 +14,10 @@ import com.javarudals.board.command.BContentCommand;
 import com.javarudals.board.command.BDeleteCommand;
 import com.javarudals.board.command.BListCommand;
 import com.javarudals.board.command.BModifyCommand;
+import com.javarudals.board.command.BReplyCommand;
 import com.javarudals.board.command.BReplyViewCommand;
 import com.javarudals.board.command.BWriteCommand;
+
 
 /**
  * Servlet implementation class BFrontController
@@ -85,9 +87,11 @@ public class BFrontController extends HttpServlet {
 			command = new BReplyViewCommand();
 			command.excute(request, response);
 			viewPage = "reply_view.jsp";
+		} else if(com.equals("/reply.do")) {
+			command = new BReplyCommand();
+			command.excute(request, response);
+			viewPage = "list.do";	
 		}
-		
-		
 		
 		
 		

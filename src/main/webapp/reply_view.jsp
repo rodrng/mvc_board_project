@@ -10,6 +10,10 @@
 	<h2>자유게시판 답변쓰기</h2>
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
 		<form action="reply.do" method="post">
+		<input type="hidden" name="bid" value="${reply_view.bid}">
+		<input type="hidden" name="bgroup" value="${reply_view.bgroup}">
+		<input type="hidden" name="bstep" value="${reply_view.bstep}">
+		<input type="hidden" name="bindent" value="${reply_view.bindent}">
 		<tr>
 			<td>번호</td>
 			<td>${reply_view.bid}</td>
